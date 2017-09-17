@@ -14,16 +14,20 @@ export default Ember.Controller.extend({
   actions: {
 
     saveInvitation() {
-      console.log(this.get('emailAddress'));
-      console.log(this.get('isValidEmail'));
-      console.log(this.get('messageText'));
-      console.log(this.get('isValidText'));
-      console.log(this.get('isDisabled'));
+      const email = this.get('emailAddress');
+      const message = this.get('messageText');
 
-      alert(`Message \"${this.get('messageText')}\" sent to email \"${this.get('emailAddress')}\"`);
-      this.set('responseMessage', `Thank you! We'll be in touch soon!`);
-      this.set('emailAddress', '');
-      this.set('messageText', '');
+      const newContact = this.store.createRecord('contact', {
+        email: email,
+        message: message
+      });
+
+      newContact.save().then((response) => {
+        alert(`Message \"${this.get('messageText')}\" sent to email \"${this.get('emailAddress')}\"`);
+        this.set('responseMessage', `Thank you! We'll be in touch soon!`);
+        this.set('emailAddress', '');
+        this.set('messageText', '');
+      });
     }
   }
 

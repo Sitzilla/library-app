@@ -12,6 +12,11 @@ Router.map(function() {
 
   this.route('admin', function() {
     this.route('invitations');
+    this.route('contact');
+  });
+
+  this.route('libraries', function() {
+    this.route('new');
   });
 });
 
